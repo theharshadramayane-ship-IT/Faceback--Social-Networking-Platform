@@ -1,0 +1,14 @@
+/workspaces/Faceback--Social-Networking-Platform/backend/target/debug/deps/serde-5d70a9e48be1f415.d: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /workspaces/Faceback--Social-Networking-Platform/backend/target/debug/build/serde-6ad8135386316341/out/private.rs
+
+/workspaces/Faceback--Social-Networking-Platform/backend/target/debug/deps/libserde-5d70a9e48be1f415.rlib: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /workspaces/Faceback--Social-Networking-Platform/backend/target/debug/build/serde-6ad8135386316341/out/private.rs
+
+/workspaces/Faceback--Social-Networking-Platform/backend/target/debug/deps/libserde-5d70a9e48be1f415.rmeta: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /workspaces/Faceback--Social-Networking-Platform/backend/target/debug/build/serde-6ad8135386316341/out/private.rs
+
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs:
+/workspaces/Faceback--Social-Networking-Platform/backend/target/debug/build/serde-6ad8135386316341/out/private.rs:
+
+# env-dep:OUT_DIR=/workspaces/Faceback--Social-Networking-Platform/backend/target/debug/build/serde-6ad8135386316341/out
