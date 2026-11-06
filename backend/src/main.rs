@@ -1,7 +1,9 @@
+mod auth;
+
 use axum::{
     extract::State,
     http::StatusCode,
-    routing::get,
+    routing::{get, post},
     Json, Router,
 };
 use serde::Serialize;
@@ -11,8 +13,8 @@ use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[derive(Clone)]
-struct AppState {
-    db: PgPool,
+pub struct AppState {
+    pub db: PgPool,
 }
 
 #[derive(Serialize)]
@@ -61,9 +63,11 @@ async fn main() -> anyhow::Result<()> {
 
     let app = Router::new()
         .route("/api/health", get(health))
+        .route("/api/auth/register", post(auth::handler::register))
+        .route("/api/auth/login", post(auth::handler::login))
         .layer(CorsLayer::permissive())
         .layer(TraceLayer::new_for_http())
-        .with_state(state);
+        .with_state(state); // <-- Passing AppState now
 
     let bind = std::env::var("BIND_ADDR").unwrap_or_else(|_| "127.0.0.1:8080".into());
     let addr: SocketAddr = bind.parse()?;
