@@ -1,16 +1,18 @@
 mod auth;
+mod posts; // <-- Added posts module
 
 use axum::{
-    extract::State,
+    extract::{State, Query},
     http::StatusCode,
     routing::{get, post},
     Json, Router,
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use sqlx::{PgPool, postgres::PgPoolOptions};
 use std::net::SocketAddr;
 use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use uuid::Uuid;
 
 #[derive(Clone)]
 pub struct AppState {
@@ -39,6 +41,37 @@ async fn health(State(state): State<AppState>) -> (StatusCode, Json<HealthRespon
     }
 }
 
+#[derive(Deserialize)]
+struct SearchQuery {
+    q: String,
+}
+
+#[derive(Serialize, sqlx::FromRow)]
+struct UserSearchResult {
+    id: Uuid,
+    username: String,
+    display_name: String,
+}
+
+async fn search_users(
+    State(state): State<AppState>,
+    Query(params): Query<SearchQuery>,
+) -> Result<Json<Vec<UserSearchResult>>, (StatusCode, String)> {
+    let search_term = format!("%{}%", params.q.to_lowercase());
+    
+    let users = sqlx::query_as::<_, UserSearchResult>(
+        "SELECT id, username, display_name FROM users 
+         WHERE LOWER(username) LIKE $1 OR LOWER(display_name) LIKE $1
+         LIMIT 10"
+    )
+    .bind(&search_term)
+    .fetch_all(&state.db)
+    .await
+    .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+
+    Ok(Json(users))
+}
+
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenvy::dotenv().ok();
@@ -63,11 +96,15 @@ async fn main() -> anyhow::Result<()> {
 
     let app = Router::new()
         .route("/api/health", get(health))
+        .route("/api/users/search", get(search_users))
         .route("/api/auth/register", post(auth::handler::register))
         .route("/api/auth/login", post(auth::handler::login))
+        // New Post Routes:
+        .route("/api/posts", post(posts::create_post))
+        .route("/api/posts", get(posts::get_feed))
         .layer(CorsLayer::permissive())
         .layer(TraceLayer::new_for_http())
-        .with_state(state); // <-- Passing AppState now
+        .with_state(state);
 
     let bind = std::env::var("BIND_ADDR").unwrap_or_else(|_| "127.0.0.1:8080".into());
     let addr: SocketAddr = bind.parse()?;
